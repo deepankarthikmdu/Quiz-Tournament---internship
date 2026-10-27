@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"
+         version="6.1">
+
+    <context-param>
+        <param-name>redisHost</param-name>
+        <param-value>localhost</param-value>
+    </context-param>
+    <context-param>
+        <param-name>redisPort</param-name>
+        <param-value>6379</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.example.redis.RedisPoolContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>org.example.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>LoginLimitFilter</filter-name>
+        <filter-class>org.example.filter.LoginLimitFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>ApiAuthenticationFilter</filter-name>
+        <filter-class>org.example.filter.ApiAuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>publicRequests</param-name>
+            <param-value>
+                * /api/auth/login
+                * /api/auth/logout
+                POST /api/users
+                GET /api/tournaments
+            </param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginLimitFilter</filter-name>
+        <url-pattern>/api/auth/login</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ApiAuthenticationFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

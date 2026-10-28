@@ -13,6 +13,9 @@ target/
 *.iml
 *.ipr
 
+### ignore database properties ###
+src/main/resources/db.properties
+
 ### Eclipse ###
 .apt_generated
 .classpath

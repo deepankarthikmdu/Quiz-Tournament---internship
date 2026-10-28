@@ -58,7 +58,7 @@ public class AuthApiServletCopy extends HttpServlet {
     private LoginRequest readLoginRequest (HttpServletRequest req, HttpServletResponse res) throws IOException {
         try(BufferedReader reader = req.getReader()){
             LoginRequest login = JsonUtil.fromJson(reader, LoginRequest.class);
-            if(login == null || login.username() == null || login.username().isBlank() || login.username().isEmpty() || login.password() == null || login.password().isEmpty() || login.password().isBlank()){
+            if(login == null || login.username() == null || login.username().isBlank() || login.password() == null || login.password().isEmpty() || login.password().isBlank()){
                 JsonUtil.sendError(res,400, "username and password are required");
                 return null;
             }

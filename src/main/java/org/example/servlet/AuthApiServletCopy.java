@@ -65,7 +65,7 @@ public class AuthApiServletCopy extends HttpServlet {
             return login;
         }
         catch (JsonParseException e) {
-            JsonUtil.sendError(res, 400, "invalid or missing json body");
+            JsonUtil.sendError(res, 400, "invalid or missing json body";
             return null;
         }
     }

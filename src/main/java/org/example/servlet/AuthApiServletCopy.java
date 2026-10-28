@@ -47,7 +47,7 @@ public class AuthApiServletCopy extends HttpServlet {
             session.setMaxInactiveInterval(30*60);
 
             JsonUtil.sendJson(res, 200,
-                    Map.of("message","login sucessfull",
+                    Map.of("message","login successful",
                             "User", new UserResponse(user.getUserId(),user.getUsername(),user.getName())));
         }catch (SQLException e){
             logDatabaseError(e);
